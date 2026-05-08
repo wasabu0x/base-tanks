@@ -51,14 +51,18 @@ export default function Game() {
 
   // ---------- Mini App SDK ready ----------
   useEffect(() => {
-    (async () => {
+    // Load Mini App SDK from CDN at runtime via script tag (not import())
+    // This prevents Next.js build from trying to resolve the URL.
+    const script = document.createElement("script");
+    script.type = "module";
+    script.textContent = `
       try {
-        const m = await import("https://esm.sh/@farcaster/miniapp-sdk");
-        await m.sdk.actions.ready();
-      } catch {
-        // not in mini app host, fine
-      }
-    })();
+        const { sdk } = await import('https://esm.sh/@farcaster/miniapp-sdk@0.2.3');
+        await sdk.actions.ready();
+        window.__farcasterSdk = sdk;
+      } catch (e) {}
+    `;
+    document.head.appendChild(script);
   }, []);
 
   // ---------- Map ----------
@@ -404,9 +408,11 @@ export default function Game() {
   // ------- Wallet & payment -------
   const getEthProvider = async () => {
     // 1) Mini App SDK provider (when running inside Base App / Warpcast)
+    //    Loaded via runtime <script> in useEffect above; available on window.
     try {
-      const m = await import("https://esm.sh/@farcaster/miniapp-sdk");
-      if (m?.sdk?.wallet?.ethProvider) return m.sdk.wallet.ethProvider;
+      if (typeof window !== "undefined" && window.__farcasterSdk?.wallet?.ethProvider) {
+        return window.__farcasterSdk.wallet.ethProvider;
+      }
     } catch {}
     // 2) Browser wallet (MetaMask / Coinbase Wallet extension)
     if (typeof window !== "undefined" && window.ethereum) return window.ethereum;
