@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 // CONFIG — change values here to customize the game
 // =====================================================
 const RECIPIENT = "0x9942E8725D2e46d2532CF24b61960e427E1F2589";
-const ENTRY_FEE_USD = 0.10;
+const ENTRY_FEE_USD = 0.01;
 const BASE_CHAIN_HEX = "0x2105";   // Base mainnet (8453). For testnet use "0x14a34"
 const BASE_CHAIN_PARAMS = {
   chainId: "0x2105",
