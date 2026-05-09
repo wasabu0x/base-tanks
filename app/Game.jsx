@@ -558,6 +558,23 @@ export default function Game() {
           )}
         </div>
 
+        <div className="touch-controls">
+          <button className="tc-up"
+            onTouchStart={(e) => { e.preventDefault(); setInput("up", true); }}
+            onTouchEnd={(e) => { e.preventDefault(); setInput("up", false); }}>▲</button>
+          <button className="tc-lt"
+            onTouchStart={(e) => { e.preventDefault(); setInput("left", true); }}
+            onTouchEnd={(e) => { e.preventDefault(); setInput("left", false); }}>◀</button>
+          <button className="tc-fire"
+            onTouchStart={(e) => { e.preventDefault(); setInput("fire", true); }}>FIRE</button>
+          <button className="tc-rt"
+            onTouchStart={(e) => { e.preventDefault(); setInput("right", true); }}
+            onTouchEnd={(e) => { e.preventDefault(); setInput("right", false); }}>▶</button>
+          <button className="tc-dn"
+            onTouchStart={(e) => { e.preventDefault(); setInput("down", true); }}
+            onTouchEnd={(e) => { e.preventDefault(); setInput("down", false); }}>▼</button>
+        </div>
+
         <aside className="stats-panel">
           <div className="stat"><div className="stat-label">LEVEL</div><div className="stat-value">{hud.level}</div></div>
           <div className="stat"><div className="stat-label">ENEMIES</div><div className="stat-value">{hud.enemiesLeft}</div></div>
@@ -571,23 +588,6 @@ export default function Game() {
         <h3>CONTROLS</h3>
         <span className="key">↑</span><span className="key">↓</span><span className="key">←</span><span className="key">→</span> move ·{" "}
         <span className="key">SPACE</span> fire
-      </div>
-
-      <div className="touch-controls">
-        <button className="tc-up"
-          onTouchStart={(e) => { e.preventDefault(); setInput("up", true); }}
-          onTouchEnd={(e) => { e.preventDefault(); setInput("up", false); }}>▲</button>
-        <button className="tc-lt"
-          onTouchStart={(e) => { e.preventDefault(); setInput("left", true); }}
-          onTouchEnd={(e) => { e.preventDefault(); setInput("left", false); }}>◀</button>
-        <button className="tc-fire"
-          onTouchStart={(e) => { e.preventDefault(); setInput("fire", true); }}>FIRE</button>
-        <button className="tc-rt"
-          onTouchStart={(e) => { e.preventDefault(); setInput("right", true); }}
-          onTouchEnd={(e) => { e.preventDefault(); setInput("right", false); }}>▶</button>
-        <button className="tc-dn"
-          onTouchStart={(e) => { e.preventDefault(); setInput("down", true); }}
-          onTouchEnd={(e) => { e.preventDefault(); setInput("down", false); }}>▼</button>
       </div>
 
       {toast && <div className="toast show">{toast}</div>}
