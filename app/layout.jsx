@@ -28,6 +28,8 @@ export const metadata = {
   other: {
     "fc:miniapp": JSON.stringify(frame),
     "fc:frame": JSON.stringify(frame),
+    // Base.dev domain ownership verification
+    "base:app_id": "69fd7fd8de35bbe9eac4ac9e",
   },
 };
 
